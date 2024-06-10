@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+    # relation
+    has_many :posts, dependent: :destroy
+
     has_secure_password
 
     before_save :downcase_email

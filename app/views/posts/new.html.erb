@@ -1,0 +1,17 @@
+<%= render partial: "posts/partials/tab_post" %>
+<h1>New Post</h1>
+
+<%= form_with(model: @post) do |form| %>
+  <%= render partial: "shared/form_errors", locals: { object: form.object } %>
+  <p>
+    <%= form.label :title %><br>
+    <%= form.text_field :title, required: true, class: "form-control" %>
+  </p>
+  <p>
+    <%= form.label :content %><br>
+    <%= form.text_area :content, required: true, class: "form-control" %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

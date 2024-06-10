@@ -17,7 +17,7 @@ module Authentication
     end
 
     def redirect_if_authenticated
-        redirect_to dashboard_index_path, alert: "You are logged in" if user_signed_in? 
+        redirect_to posts_path, alert: "You are logged in" if user_signed_in? 
     end
 
     private
@@ -28,5 +28,9 @@ module Authentication
 
     def user_signed_in?
         Current.user.present?
+    end
+
+    def require_user
+        redirect_to login_path unless current_user
     end
 end
