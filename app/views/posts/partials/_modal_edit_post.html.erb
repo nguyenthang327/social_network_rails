@@ -1,0 +1,50 @@
+
+<div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editPostModalLabel">Edit Post <span id="titlePostId"></span></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= form_with( id: "editPostForm") do |form| %>
+          <%= hidden_field_tag '_method', 'put' %>
+          <%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
+          <div class="mb-3">
+            <%= form.label :title, class: "form-label" %>
+            <%= form.text_field :title, required: true, id: "post_title", class: "form-control", name: "post[title]"  %>
+          </div>
+
+          <div class="mb-3">
+            <%= form.label :content, class: "form-label" %>
+            <%= form.text_area :content, required: true, id: "post_content", class: "form-control", name: "post[content]"  %>
+          </div>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="saveChanges">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$(document).on('click', '.edit-post-link', function() {
+  event.preventDefault();
+  const postId = $(this).data('post-id');
+
+  $('#editPostModal').modal('show');
+  $.get('/posts/' + postId + '/edit', function(data) {
+    $('#editPostForm').attr('action', '/posts/' + postId);
+    $('#titlePostId').text(data.id);
+    $('#post_title').val(data.title);
+    $('#post_content').val(data.content);
+    $('#editPostModal').modal('show');
+  });
+});
+
+$('#saveChanges').on('click', function() {
+  $('#editPostForm').submit();
+});
+</script>

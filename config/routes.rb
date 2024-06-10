@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :posts, except: [:show]
   get 'dashboard/index'
   # get 'static_pages/home'
   root "static_pages#home"
