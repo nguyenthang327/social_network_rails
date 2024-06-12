@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :require_user
 
   def index
-    @posts = Post.includes(:user).order(id: :desc).paginate(page: params[:page], per_page: 5)
+    @posts = Post.includes(:user, :comments, :likes).order(id: :desc).paginate(page: params[:page], per_page: 5)
   end
 
   def new
@@ -37,6 +37,8 @@ class PostsController < ApplicationController
     @post.destroy
     redirect_back fallback_location: posts_url, notice: 'Successfully destroyed.'
   end
+
+  private
 
   def post_params
     params.require(:post).permit(:title, :content)

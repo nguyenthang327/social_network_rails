@@ -28,23 +28,3 @@
     </div>
   </div>
 </div>
-
-<script>
-$(document).on('click', '.edit-post-link', function() {
-  event.preventDefault();
-  const postId = $(this).data('post-id');
-
-  $('#editPostModal').modal('show');
-  $.get('/posts/' + postId + '/edit', function(data) {
-    $('#editPostForm').attr('action', '/posts/' + postId);
-    $('#titlePostId').text(data.id);
-    $('#post_title').val(data.title);
-    $('#post_content').val(data.content);
-    $('#editPostModal').modal('show');
-  });
-});
-
-$('#saveChanges').on('click', function() {
-  $('#editPostForm').submit();
-});
-</script>

@@ -5,3 +5,24 @@
     border-radius: 10px;
     background-color: #f9f9f9;
 }
+
+.comment-form {
+    margin-top: 20px;
+}
+  
+.comment-list {
+    background-color: #fff;
+    max-height: 200px;
+    list-style-type: none;
+    padding-left: 0;
+    overflow-y: auto;
+}
+  
+.comment-list li {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+  
+.comment-list li:last-child {
+    border-bottom: none;
+}
