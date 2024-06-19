@@ -3,4 +3,12 @@ class Comment < ApplicationRecord
   belongs_to :post
 
   validates :content, presence: true
+
+  after_create :send_notification
+
+  private
+
+  def send_notification
+    PostNotificationMailer.new_like(self.post, self).deliver_later
+  end
 end
