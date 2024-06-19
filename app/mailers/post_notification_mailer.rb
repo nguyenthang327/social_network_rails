@@ -1,7 +1,7 @@
 class PostNotificationMailer < ApplicationMailer
   def new_like(post, user)
     @post = post
-    @user = user_id
+    @user = user
     mail(to: @post.user.email, subject: 'New like!')
   end
 

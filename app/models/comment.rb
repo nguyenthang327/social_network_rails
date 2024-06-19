@@ -9,6 +9,6 @@ class Comment < ApplicationRecord
   private
 
   def send_notification
-    PostNotificationMailer.new_like(self.post, self).deliver_later
+    PostNotificationMailer.new_comment(self.post, self).deliver_later
   end
 end
