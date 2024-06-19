@@ -5,6 +5,8 @@ ruby "3.1.6"
 
 gem 'will_paginate', '~> 4.0'
 
+gem 'dotenv-rails', groups: [:development, :test, :production]
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.8", ">= 7.0.8.4"
 
