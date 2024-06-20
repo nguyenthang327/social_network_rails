@@ -1,3 +1,13 @@
+module ActionDispatch
+  module Routing
+    class Mapper
+      def authenticated(&block)
+        scope(constraints: CurrentUserConstraint.new, &block)
+      end
+    end
+  end
+end
+
 Rails.application.routes.draw do
   get 'dashboard/index'
   # get 'static_pages/home'
@@ -6,12 +16,14 @@ Rails.application.routes.draw do
   post "sign_up", to: "users#create"
   get "sign_up", to: "users#new"
   post "login", to: "sessions#create"
-  delete "logout", to: "sessions#destroy"
   get "login", to: "sessions#new"
 
-  resources :posts, except: [:show] do
-    resources :comments, only: [:create]
+  authenticated do
+    delete "logout", to: "sessions#destroy"
+    resources :posts, except: [:show] do
+      resources :comments, only: [:create]
+    end
+    post "post_likes", to: "likes#toggle"
   end
-  post "post_likes", to: "likes#toggle"
   
 end
